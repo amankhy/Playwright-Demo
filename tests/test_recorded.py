@@ -12,8 +12,7 @@ def test_example(page: Page, base_url, credentials) -> None:
 
     page.get_by_role("button", name="Login").click()
 
-    # ✅ Assertion
-    expect(page.get_by_role("button", name="Upgrade")).to_be_visible()
+    expect(page.locator("h6")).to_contain_text("Dashboard")
 
     page.get_by_role("link", name="Performance").click()
     page.get_by_role("link", name="Dashboard").click()
