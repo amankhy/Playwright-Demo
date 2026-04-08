@@ -22,3 +22,20 @@ def api_context(playwright):
             "Content-Type": "application/json"
         }
     )
+
+def pytest_addoption(parser):
+    parser.addoption("--base_url", action="store", default="")
+    parser.addoption("--username", action="store", default="Admin")
+    parser.addoption("--password", action="store", default="admin123")
+
+@pytest.fixture(scope="session")
+def base_url(request):
+    return request.config.getoption("--base_url") or "https://opensource-demo.orangehrmlive.com"
+
+
+@pytest.fixture(scope="session")
+def credentials(request):
+    return {
+        "username": request.config.getoption("--username"),
+        "password": request.config.getoption("--password"),
+    }
